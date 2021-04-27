@@ -17,62 +17,66 @@ char grid[10] = {'0','1','2','3','4','5','6','7','8','9'};
 char player;
 string player_X , player_O;
 int count = 1, input;
-string state = "input_name", inp;
+//string state = "input_name";
+char inp;
 int win;
 
 void draw_grid();		//Function to draw grid
 int win_check();		//Function to check if the win condition is satisfied
-char player_toggle(int cnt);		//Function to toggle player X and 0
+char player_toggle_inp(int cnt);		//Function to toggle player X and 0
 void usr_inputs();		//Function to get the user inputs for the grid and insert X or 0 accordingly
 
+enum state_val {input_name, player_toggle, X_input, O_input, win_condition, game_dec};
 
 int main()
 {
+ enum state_val state;
+ state = input_name;
  while(1)
  {
 	switch(state)
 	{
-		case "input_name" : {
+		case input_name : {
 			cout << "Enter Player X name" << endl;
 			cin >> player_X;
 			cout << "Enter Player O name" << endl;
 			cin >> player_O;
 			
-			state = "player_toggle";
+			state = player_toggle;
 			break;
 		}
-		case "player_toggle" : {
-			player = player_toggle(count);
+		case player_toggle : {
+			player = player_toggle_inp(count);
 			if (player == 'X')
-			state = "X_input";
+			state = X_input;
 			else if (player == 'O')
-			state = "O_input";
+			state = O_input;
 			break;
 			}
-		case "X_input" : {
+		case X_input : {
 			usr_inputs();
-			state = "win_condition" ;
+			state = win_condition ;
         		break;
 			}
-		case "O_input" : {
+		case O_input : {
 			usr_inputs();
-			state = "win_condition" ;
+			state = win_condition ;
         		break;
 			}
-		case "win_condition" : {
+		case win_condition : {
 			win = win_check();
 			count++;
 			
 			if(win == -1)
-				state = "player_toggle";
+				state = player_toggle;
 			else if (count > 5)
-				state = "game_dec";
+				state = game_dec;
 			else 
-				state = "win_condition" ;
+				state = win_condition ;
 			break;
         		}
 		
-		case "game_dec" : {
+		case game_dec : {
 			draw_grid();
 			if(win ==1)
         		cout<<"==>\aPlayer "<< player <<" win " << endl;
@@ -89,14 +93,15 @@ int main()
 					
 					
 				}
-				state = "input_name";
+				state = input_name;
 				count = 1;
 			}
 			else if (inp == 'N' || inp == 'n')
 				return 0;
     			cin.ignore();
     			cin.get();
-    			//return 0;
+    			break;
+    			return 0;
         		}
 	
 	}
@@ -156,7 +161,7 @@ int win_check()
         return -1;
 }
 
-char player_toggle(int cnt)
+char player_toggle_inp(int cnt)
 {
 	if (cnt%2 == 1)
 	{
