@@ -19,3 +19,7 @@ After writing the command and pressing enter, the compiler automatically generat
 After entering the names inside the terminal the game starts by asking the first player to enter the number of the location on the grid where he wants to put X.
 
 ![](Images/gui.PNG)
+
+The players can go on playing until the conditions satisfy and the game decides the winner or else the game draws.
+
+![](Images/game_dec.PNG)
