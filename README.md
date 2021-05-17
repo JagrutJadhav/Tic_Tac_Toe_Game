@@ -11,3 +11,8 @@ To run the game we need to compile the c++ file and build the executable for the
 
 ![](Images/code_compile.PNG)
 
+After writing the command and pressing enter, the compiler automatically generates an executable file for the game naming a.out. To execute the file in terminal we write
+"./a.out" which will bring us inside our first state of the state machine. The game will ask for the player names.
+
+![](Images/player_name.PNG)
+
